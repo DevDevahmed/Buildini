@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 import { Client } from 'src/app/models/client.interface';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/guard/auth.service';
 
 @Component({
   selector: 'app-add-client',

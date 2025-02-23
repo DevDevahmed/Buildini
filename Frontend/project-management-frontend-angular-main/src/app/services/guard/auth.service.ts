@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractService } from './abstract-service';
+import { AbstractService } from '../abstract-service';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 

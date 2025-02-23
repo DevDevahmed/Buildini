@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { DesignationResponse } from 'src/app/models/designation.response';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/guard/auth.service';
 import { DesignationService } from 'src/app/services/designation.service';
 
 @Component({

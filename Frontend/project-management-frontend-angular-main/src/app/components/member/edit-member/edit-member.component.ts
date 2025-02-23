@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/models/member.interface';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/guard/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { DesignationService } from 'src/app/services/designation.service';
 import { EmployeeService } from 'src/app/services/employee.service';

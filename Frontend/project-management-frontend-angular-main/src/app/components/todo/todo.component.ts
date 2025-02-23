@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Employee } from 'src/app/models/employee.interface';
 import { Todo } from 'src/app/models/todo.interface';
 import { StatusPipe } from 'src/app/pipes/status.pipe';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/guard/auth.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { SidebarService } from 'src/app/services/sidebar.service';

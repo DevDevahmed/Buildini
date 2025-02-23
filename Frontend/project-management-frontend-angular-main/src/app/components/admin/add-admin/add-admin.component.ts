@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Admin } from 'src/app/models/admin.interface';
 import { AdminService } from 'src/app/services/admin.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/guard/auth.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -72,7 +72,12 @@ import { TodoComponent } from './components/todo/todo.component';
 import { ReportComponent } from './components/report/report.component';
 import { FeatureReportComponent } from './components/feature-report/feature-report.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { KeycloakService } from './services/keycloak/keycloak.service';
 
+
+export function kcFactory(kcService: KeycloakService) {
+  return () => kcService.init();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -159,8 +164,16 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      deps: [KeycloakService],
+      useFactory: kcFactory,
+      multi: true
+    }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+ 
 })
 export class AppModule { }

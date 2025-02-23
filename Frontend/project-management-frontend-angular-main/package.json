@@ -18,6 +18,7 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+    "keycloak-js": "^21.1.1",
     "ng-circle-progress": "^1.6.0",
     "ng2-charts": "^3.1.2",
     "ngx-toastr": "^14.3.0",

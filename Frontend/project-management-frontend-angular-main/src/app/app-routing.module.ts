@@ -55,9 +55,10 @@ import { ReportComponent } from './components/report/report.component';
 import { FeatureReportComponent } from './components/feature-report/feature-report.component';
 import { DashboardsResolverService } from './services/dashboards-resolver.service';
 import { AlreadyLoggedInGuard } from './AlreadyLoggedInGuard.guard';
+//import { authGuard } from './services/guard/auth.guard';
 
 const routes: Routes = [
-  {path: 'dashboard', component: DashboardComponent, children: [
+  {path: 'dashboard', component: DashboardComponent, /*canActivate: [authGuard]*/ children: [
     {path: '', component: PageContentComponent,
       resolve: { dashboard: DashboardsResolverService}
     },
@@ -111,8 +112,8 @@ const routes: Routes = [
     {path: 'report-feature', component: FeatureReportComponent},
     {path: 'unauthorizes', component: UnauthorizedComponent}
   ]},
-  {path: 'login', component: LoginComponent},
-  {path: '', redirectTo: '/login', pathMatch: 'full' },
+  {path: 'dashboard', component: LoginComponent},
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {path: '**', component: ErrorComponent}
 ];
 
