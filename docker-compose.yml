@@ -14,6 +14,44 @@ services:
     networks:
       - microservices-net
 
+  # ----------- Keycloak ----------------------------
+  keycloak_db:
+    image: postgres
+    container_name: keycloak_db
+    restart: always
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloakpassword
+      POSTGRES_DB: keycloak
+    volumes:
+      - keycloak_data:/var/lib/postgresql/data  # Persistance des données
+    ports:
+      - "5437:5432"
+    networks:
+      - microservices-net
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.1.2
+    container_name: keycloak
+    restart: always
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL_HOST: keycloak_db  # Service PostgreSQL dédié à Keycloak
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloakpassword
+      KC_HOSTNAME: localhost
+    ports:
+      - "9090:8080"
+    command: [ "start-dev" ]
+    depends_on:
+      - keycloak_db  # Attente de la base Keycloak avant de démarrer
+    networks:
+      - microservices-net
+
+  # ----------------- Autres bases de données -----------------
   project_db:
     image: postgres
     container_name: project_db
@@ -82,31 +120,6 @@ services:
     networks:
       - microservices-net
 
-  # ---------------- Message Broker ----------------
-  # zookeeper:
-  #   image: confluentinc/cp-zookeeper:7.0.0
-  #   container_name: zookeeper
-  #   environment:
-  #     ZOOKEEPER_CLIENT_PORT: 2181
-  #     ZOOKEEPER_TICK_TIME: 2000
-  #   networks:
-  #     - microservices-net
-
-  # kafka:
-  #   image: confluentinc/cp-kafka:7.0.0
-  #   container_name: kafka
-  #   depends_on:
-  #     - zookeeper
-  #   environment:
-  #     KAFKA_BROKER_ID: 1
-  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-  #     KAFKA_CREATE_TOPICS: "tasks:3:1,notifications:3:1"
-  #   ports:
-  #     - "9092:9092"
-  #   networks:
-  #     - microservices-net
-
   # ---------------- Monitoring & Tools ----------------
   pgadmin:
     image: dpage/pgadmin4
@@ -134,38 +147,6 @@ services:
     networks:
       - microservices-net
 
-  # zipkin:
-  #   image: openzipkin/zipkin
-  #   container_name: zipkin
-  #   ports:
-  #     - "9411:9411"
-  #   networks:
-  #     - microservices-net
-
-  # mail-dev:
-  #   image: maildev/maildev
-  #   container_name: mail_dev
-  #   ports:
-  #     - "1080:1080"  # MailDev web interface
-  #     - "1025:1025"  # SMTP server
-  #   networks:
-  #     - microservices-net
-
-  # ---------------- Angular App ----------------
-#  angular-app:
-#    build: .
-#    container_name: angular_app
-#    ports:
-#      - "4200:4200"
-#    volumes:
-#      - ./:/app
-#      - /app/node_modules
-#    environment:
-#      NODE_ENV: development
-#    command: npm start
-#    networks:
-#      - microservices-net
-
 networks:
   microservices-net:
     driver: bridge
@@ -177,3 +158,4 @@ volumes:
   inspection_data:
   timesheet_data:
   procurement_data:
+  keycloak_data:
