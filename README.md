@@ -15,9 +15,7 @@ Buildini is a full-stack project management platform designed to streamline the 
 
 ---
 
-## 🧰 Technologies Used
-
-### ⚙️ Backend
+## 🧰 Technologies Used ⚙️
 - **Java 17**
 - **Spring Boot 3.x**
 - **Spring Data JPA**
@@ -28,10 +26,6 @@ Buildini is a full-stack project management platform designed to streamline the 
 - **Lombok** (boilerplate reduction)
 - **Swagger/OpenAPI** for API documentation
 
-### 🖥️ Frontend
-- **HTML5**, **CSS3**, **JavaScript**
-- Potentially Angular/React/Vue (to be confirmed based on expansion)
-- Responsive UI components for project interaction
 
 ### 📦 DevOps & Infrastructure
 - **Docker & Docker Compose**
